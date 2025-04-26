@@ -1,0 +1,176 @@
+/* RESET & GLOBAL STYLES */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+	/* 11-stop steel blue-gray gradient */
+	background: linear-gradient(
+		135deg,
+		#4b586a 0%,
+		#45506a 10%,
+		#3f486a 20%,
+		#39416a 30%,
+		#333a6a 40%,
+		#2d336a 50%,
+		#272c6a 60%,
+		#22256a 70%,
+		#1c1e6a 80%,
+		#16176a 90%,
+		#28303b 100%
+	);
+	font-family: sans-serif;
+	overflow-x: hidden;
+}
+
+/* Infographic (Hub and Spokes) Container */
+#hubContainer {
+	position: relative;
+	width: 100vw;
+	height: 60vh; /* Occupies the top portion */
+}
+
+/* Background image behind the hub container */
+#hubContainer::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: url("table-5356682_1280.jpg") center/cover no-repeat;
+	opacity: 0.15;
+	z-index: 0;
+}
+
+/* Base card style (all text is now bright white) */
+.card {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding: 8px;
+	cursor: pointer;
+	transition: transform 0.3s ease, background 0.3s ease;
+	font-size: 1rem;
+	font-weight: bold;
+	color: #ffffff; /* Force white */
+	line-height: 1.2;
+	overflow-wrap: break-word;
+	text-decoration: none;
+	z-index: 1;
+}
+
+/* Hub card: glass style, circular, text is centered */
+.hub {
+	width: 200px;
+	height: 200px;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	background: rgba(255, 255, 255, 0.2);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	backdrop-filter: blur(8px);
+	border-radius: 50%;
+	color: #ffffff;
+}
+
+/* Explicitly force the hub anchor to be white */
+.hub a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	color: #ffffff; /* Force white for links inside hub */
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	white-space: nowrap;
+	line-height: 1;
+	font-size: 1.2rem; /* Reduced font size as requested */
+}
+
+/* Spoke cards: glass style, bright white text */
+.spoke {
+	position: absolute;
+	padding: 10px;
+	background: rgba(255, 255, 255, 0.2);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	backdrop-filter: blur(8px);
+	border-radius: 10px;
+	color: #ffffff;
+	display: inline-block; /* Allow size to match content */
+}
+
+/* Ensure spoke anchors size to intrinsic content */
+.spoke a {
+	width: auto;
+	height: auto;
+	display: inline-block;
+	text-decoration: none;
+	color: inherit;
+}
+
+/* General card anchors */
+.card a {
+	color: inherit;
+	text-decoration: none;
+}
+
+/* Summary Section styling */
+#summary-section {
+	padding: 20px;
+	max-width: 800px;
+	margin: 20px auto;
+}
+
+/* Summary card styling */
+.summary-card {
+	background: rgba(255, 255, 255, 0.2);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	backdrop-filter: blur(8px);
+	border-radius: 10px;
+	padding: 15px;
+	margin-bottom: 15px;
+}
+
+/* Summary title (H2): bright white, slightly smaller */
+.summary-title {
+	margin-bottom: 10px;
+	font-size: 1.2rem; /* Reduced from 1.5rem */
+	font-weight: bold;
+	color: #ffffff;
+}
+
+/* Summary body: bright white */
+.summary-body {
+	color: #ffffff;
+	font-size: 1.2rem; /* Reduced from 1.5rem */
+	line-height: 1.4;
+	margin: 0;
+}
+
+/* Back to Top button: bright white text */
+.back-to-top {
+	margin-top: 10px;
+	padding: 5px;
+	background: rgba(255, 255, 255, 0.2);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	backdrop-filter: blur(8px);
+	border-radius: 5px;
+	text-align: center;
+	font-size: 0.75rem;
+	display: inline-block;
+}
+.back-to-top a {
+	color: #ffffff;
+	text-decoration: none;
+	display: inline-block;
+}
