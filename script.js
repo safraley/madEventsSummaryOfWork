@@ -1,26 +1,30 @@
-// Positions the hub and spoke cards along a circular arc
+// Positions the hub and spoke cards along a circular arc for larger screens.
+// On mobile screens (<=480px), this function disables dynamic positioning
+// so that the media query can handle stacking the elements automatically.
 function recalcPositions() {
+	const containerWidth = window.innerWidth;
+
+	// Disable dynamic positioning for mobile screens
+	if (containerWidth <= 480) {
+		document.querySelectorAll(".spoke").forEach((spoke) => {
+			spoke.style.left = "";
+			spoke.style.top = "";
+		});
+		return; // Exit function early for mobile layouts
+	}
+
 	const container = document.getElementById("hubContainer");
 	const hub = document.querySelector(".hub");
 	const hubRect = hub.getBoundingClientRect();
 	const hubCenterX = hubRect.left + hubRect.width / 2;
 	const hubCenterY = hubRect.top + hubRect.height / 2;
 
-	const containerWidth = container.offsetWidth;
-	const containerHeight = container.offsetHeight;
+	const containerWidthAdjusted = Math.max(container.offsetWidth, 600);
+	const radius = Math.min(container.offsetWidth, container.offsetHeight) * 0.3;
 
-	// Use effective width so that on narrow viewports the offsets don't shrink too much.
-	const effectiveWidth = Math.max(containerWidth, 600);
-
-	// Responsive radius based on the smaller container dimension.
-	const radius = Math.min(containerWidth, containerHeight) * 0.3;
-
-	// Calculate horizontal offsets using effective width.
-	const baseHorizontalOffset = Math.max(100, effectiveWidth * 0.15);
-	const additionalOffset = Math.max(50, effectiveWidth * 0.1);
-
-	// Define vertical arc span: 40% of container height, or at least 220px.
-	const arcVerticalSpan = Math.max(220, containerHeight * 0.4);
+	const baseHorizontalOffset = Math.max(100, containerWidthAdjusted * 0.15);
+	const additionalOffset = Math.max(50, containerWidthAdjusted * 0.1);
+	const arcVerticalSpan = Math.max(220, container.offsetHeight * 0.4);
 
 	const n = 5; // Number of spokes per side.
 	const allSpokes = Array.from(document.querySelectorAll(".spoke"));
@@ -33,12 +37,8 @@ function recalcPositions() {
 		const x =
 			hubCenterX - baseHorizontalOffset - additionalOffset * parabolicFactor;
 
-		const rect = spoke.getBoundingClientRect();
-		const spokeWidth = rect.width;
-		const spokeHeight = rect.height;
-
-		spoke.style.left = `${x - spokeWidth / 2}px`;
-		spoke.style.top = `${y - spokeHeight / 2}px`;
+		spoke.style.left = `${x}px`;
+		spoke.style.top = `${y}px`;
 	});
 
 	// Position right arc spokes.
@@ -49,12 +49,8 @@ function recalcPositions() {
 		const x =
 			hubCenterX + baseHorizontalOffset + additionalOffset * parabolicFactor;
 
-		const rect = spoke.getBoundingClientRect();
-		const spokeWidth = rect.width;
-		const spokeHeight = rect.height;
-
-		spoke.style.left = `${x - spokeWidth / 2}px`;
-		spoke.style.top = `${y - spokeHeight / 2}px`;
+		spoke.style.left = `${x}px`;
+		spoke.style.top = `${y}px`;
 	});
 }
 

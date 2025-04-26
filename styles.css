@@ -48,7 +48,7 @@ body {
 	z-index: 0;
 }
 
-/* Base card style (all text is now pure white) */
+/* Base card style */
 .card {
 	position: absolute;
 	display: flex;
@@ -60,7 +60,7 @@ body {
 	transition: transform 0.3s ease, background 0.3s ease;
 	font-size: 1rem;
 	font-weight: bold;
-	color: #ffffff; /* Force white */
+	color: #ffffff;
 	line-height: 1.2;
 	overflow-wrap: break-word;
 	text-decoration: none;
@@ -88,13 +88,13 @@ body {
 	justify-content: center;
 	width: 100%;
 	height: 100%;
-	color: #ffffff; /* Explicitly force white */
+	color: #ffffff;
 	text-align: center;
 	margin: 0;
 	padding: 0;
 	white-space: nowrap;
 	line-height: 1;
-	font-size: 1.2rem; /* Reduced font size */
+	font-size: 1.2rem;
 }
 
 /* Spoke cards: glass style, bright white text; size adapts to content */
@@ -106,8 +106,9 @@ body {
 	backdrop-filter: blur(8px);
 	border-radius: 10px;
 	color: #ffffff;
-	display: inline-block; /* Allow size to match content */
+	display: inline-block;
 }
+
 /* Ensure spoke anchors size to intrinsic content */
 .spoke a {
 	width: auto;
@@ -143,7 +144,7 @@ body {
 /* Summary title (H2): bright white and bold */
 .summary-title {
 	margin-bottom: 10px;
-	font-size: 1.2rem; /* Reduced */
+	font-size: 1.2rem;
 	font-weight: bold;
 	color: #ffffff;
 }
@@ -151,7 +152,7 @@ body {
 /* Summary body: bright white */
 .summary-body {
 	color: #ffffff;
-	font-size: 1.2rem; /* Reduced */
+	font-size: 1.2rem;
 	line-height: 1.4;
 	margin: 0;
 }
@@ -175,12 +176,11 @@ body {
 }
 
 /* ------------------ */
-/* MOBILE LAYOUT: STACK VERTICALLY
-	 This media query overrides the absolute positioning on small screens,
-	 making the hub and spoke cards stack vertically.
-  --------------------- */
+/* MOBILE LAYOUT: New design for small screens
+   In this media query, we revert from absolute positioning to a simpler, stacked layout.
+   All cards (hub and spokes) will be in document flow so that all clickable options show up immediately.
+*/
 @media screen and (max-width: 480px) {
-	/* Change the layout of the container to a vertical flex layout */
 	#hubContainer {
 		position: static;
 		height: auto;
@@ -188,9 +188,17 @@ body {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		justify-content: center;
 	}
 
-	/* Remove absolute positioning so that cards stack vertically */
+	.hub {
+		position: static !important;
+		transform: none;
+		margin: 20px auto;
+		width: 150px;
+		height: 150px;
+	}
+
 	.card {
 		position: static !important;
 		margin: 10px auto;
@@ -198,14 +206,9 @@ body {
 		max-width: 400px;
 	}
 
-	/* Adjust anchor styling for cards on mobile */
 	.card a {
 		width: 100%;
 		height: auto;
 		padding: 10px;
 	}
-
-	/* Optional: Hide the JavaScript repositioning if desired.
-	   You might consider adding a conditional check in your script,
-	   but overriding CSS here will force a vertical layout on small screens. */
 }
